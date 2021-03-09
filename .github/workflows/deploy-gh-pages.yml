@@ -10,11 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        if: github.event_name == 'push'
-        with:
-          ref: build
-          path: build_final
-
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
