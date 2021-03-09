@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://beanio.github.com/blog</id>
+    <title>BeanIO v3 Blog</title>
+    <updated>2015-10-25T23:29:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://beanio.github.com/blog"/>
+    <subtitle>BeanIO v3 Blog</subtitle>
+    <icon>https://beanio.github.com/img/logo.svg</icon>
+</feed>
