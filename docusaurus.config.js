@@ -79,13 +79,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/beanio/beanio.github.com/edit/master/docs/',
+            'https://github.com/beanio/beanio.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/beanio/beanio.github.com/edit/master/blog/',
+            'https://github.com/beanio/beanio.github.io/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
