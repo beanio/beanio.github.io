@@ -62,7 +62,7 @@ steps you'll need to follow to update your code and mapping files.</p>
 
 <h3>1.2.1. Java Changes</h3>
 <p>The <code>org.beanio.BeanReaderContext</code> class was renamed 
-<a href="../api/org/beanio/RecordContext.html"><code>RecordContext</code></a> in order
+<a href="http://beanio.org/2.1/docs/api/org/beanio/RecordContext.html"><code>RecordContext</code></a> in order
 to support bean objects bound to multiple records.</p>
 
 <p>The exception classes <code>org.beanio.BeanReaderException</code> and <code>org.beanio.BeanWriterException</code>
@@ -72,9 +72,9 @@ when the underlying input stream throws a <code>java.io.IOException</code>, or w
 is invoked on a closed stream.</p>
 
 <p>The <code>org.beanio.stream.RecordReaderFactory</code> and <code>org.beanio.stream.RecordWriterFactory</code> interfaces
-have been consolidated into the <a href="../api/org/beanio/stream/RecordParserFactory.html"><code>RecordParserFactory</code></a>
-interface, which is also used to create <a href="../api/org/beanio/stream/RecordMarshaller.html"><code>RecordMarshaller</code></a>
-and <a href="../api/org/beanio/stream/RecordUnmarshaller.html"><code>RecordUnmarshaller</code></a> implementations
+have been consolidated into the <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html"><code>RecordParserFactory</code></a>
+interface, which is also used to create <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordMarshaller.html"><code>RecordMarshaller</code></a>
+and <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordUnmarshaller.html"><code>RecordUnmarshaller</code></a> implementations
 for parsing individual records.</p>
 
 <p>All type handlers and Spring related classes are unchanged or backwards compatible.
@@ -104,7 +104,7 @@ a default order.</p>
 <p>The <code>reader</code> and <code>writer</code> elements have been combined into a single <code>parser</code> element.
 Format specific property names have not changed.  If you have overridden the default <code>RecordReaderFactory</code> or
 <code>RecordWriterFactory</code>, you will need to modify your class to implement 
-<a href="../api/org/beanio/stream/RecordParserFactory.html"><code>RecordParserFactory</code></a> instead.</p>
+<a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html"><code>RecordParserFactory</code></a> instead.</p>
 
 <p>The <code>minOccurs</code> attribute for a <code>record</code> now defaults to 0, instead of 1.</p>
 
@@ -306,7 +306,7 @@ Jennifer,Jones,Marketing,60000,01012011
 <h1><a name="CoreConcepts">3.0. Core Concepts</a></h1>
 
 <h2><a name="BeanReader">3.1. BeanReader</a></h2>
-<p>The <a href="../api/org/beanio/BeanReader.html"><code>org.beanio.BeanReader</code></a> interface, shown below, 
+<p>The <a href="http://beanio.org/2.1/docs/api/org/beanio/BeanReader.html"><code>org.beanio.BeanReader</code></a> interface, shown below, 
 is used to read bean objects from
 an input stream.  The <code>read()</code> method returns an unmarshalled bean object for the next record
 or group of records read from the input stream.  When the end of the stream is reached, <code>null</code> 
@@ -349,7 +349,7 @@ public interface BeanReader {
 ```
 
 <h2><a name="BeanWriter">3.2. BeanWriter</a></h2>
-<p>The <a href="../api/org/beanio/BeanWriter.html"><code>org.beanio.BeanWriter</code></a> interface, shown below, 
+<p>The <a href="http://beanio.org/2.1/docs/api/org/beanio/BeanWriter.html"><code>org.beanio.BeanWriter</code></a> interface, shown below, 
 is used to write bean objects to an output stream.  Calling the <code>write(Object)</code> method marshals a bean 
 object to the output stream.  In some cases where multiple record types are not discernible by class type 
 or record identifying fields, the <code>write(String,Object)</code> method can be used to 
@@ -372,7 +372,7 @@ public interface BeanWriter {
 }
 ```
 <h2><a name="Unmarshaller">3.3. Unmarshaller</a></h2>
-<p>The <a href="../api/org/beanio/Unmarshaller.html"><code>org.beanio.Unmarshaller</code></a> interface, shown below, 
+<p>The <a href="http://beanio.org/2.1/docs/api/org/beanio/Unmarshaller.html"><code>org.beanio.Unmarshaller</code></a> interface, shown below, 
 is used to unmarshal a bean object from a <code>String</code> record.</p>
 
 ```java
@@ -397,7 +397,7 @@ public interface Unmarshaller {
 ```
 
 <h2><a name="Marshaller">3.4. Marshaller</a></h2>
-<p>The <a href="../api/org/beanio/Marshaller.html"><code>org.beanio.Marshaller</code></a> interface, shown below, 
+<p>The <a href="http://beanio.org/2.1/docs/api/org/beanio/Marshaller.html"><code>org.beanio.Marshaller</code></a> interface, shown below, 
 is used to marshal a bean object into a <code>String</code> record.</p>
 
 ```java
@@ -454,7 +454,7 @@ and <code>xml</code>.  Mapping files are fully explained in the next section
 ```
 
 <h2><a name="StreamFactory">3.6. StreamFactory</a></h2>
-<p>The <a href="../api/org/beanio/StreamFactory.html"><code>org.beanio.StreamFactory</code></a> class 
+<p>The <a href="http://beanio.org/2.1/docs/api/org/beanio/StreamFactory.html"><code>org.beanio.StreamFactory</code></a> class 
 is used to load mapping files and create <code>BeanReader</code>, <code>BeanWriter</code>, <code>Marshaller</code> 
 and <code>Unmarshaller</code> instances.  The following
 code snippet shows how to instantiate a <code>StreamFactory</code>, load a mapping
@@ -3331,7 +3331,7 @@ without the need for a mapping file.</p>
 
 <p>Like in a mapping file, components are assumed to be ordered as they are added to their parent, unless
 <code>at</code> (for fields) or <code>order</code> (for records and groups) is explicitly set.
-For more information, refer to the Javadocs for the <a href="../api/org/beanio/builder/package-summary.html">
+For more information, refer to the Javadocs for the <a href="http://beanio.org/2.1/docs/api/org/beanio/builder/package-summary.html">
 <code>org.beanio.builder</code></a> package.</p>
 
 
@@ -3955,14 +3955,14 @@ for a stream.</p>
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the <a href="../api/org/beanio/stream/RecordParserFactory.html">
+  <td>The fully qualified class name of the <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html">
     <code>org.beanio.stream.RecordParserFactory</code></a> implementation
     to use for this stream.  If not specified, one of the following default factories is
     used based on the stream format:<br />
-    <br />csv - <a href="../api/org/beanio/stream/csv/CsvRecordParserFactory.html"><code>org.beanio.stream.csv.CsvRecordParserFactory</code></a>
-    <br />delimited - <a href="../api/org/beanio/stream/delimited/DelimitedRecordParserFactory.html"><code>org.beanio.stream.delimited.DelimitedRecordParserFactory</code></a>
-    <br />fixedlength - <a href="../api/org/beanio/stream/fixedlength/FixedLengthRecordParserFactory.html"><code>org.beanio.stream.fixedlength.FixedLengthRecordParserFactory</code></a>
-    <br />xml - <a href="../api/org/beanio/stream/xml/XmlRecordParserFactory.html"><code>org.beanio.stream.xml.XmlRecordParserFactory</code></a>
+    <br />csv - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/csv/CsvRecordParserFactory.html"><code>org.beanio.stream.csv.CsvRecordParserFactory</code></a>
+    <br />delimited - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/delimited/DelimitedRecordParserFactory.html"><code>org.beanio.stream.delimited.DelimitedRecordParserFactory</code></a>
+    <br />fixedlength - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/fixedlength/FixedLengthRecordParserFactory.html"><code>org.beanio.stream.fixedlength.FixedLengthRecordParserFactory</code></a>
+    <br />xml - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/xml/XmlRecordParserFactory.html"><code>org.beanio.stream.xml.XmlRecordParserFactory</code></a>
     <p>Overriding the record parser factory for XML is not supported (but also not prevented).</p>
   </td>
   <td>No</td>
