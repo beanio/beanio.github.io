@@ -5,16 +5,16 @@ module.exports = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-  organizationName: 'beanio', // Usually your GitHub org/user name.
-  projectName: 'beanio', // Usually your repo name.
+  favicon: 'img/logo.svg',
+  organizationName: 'beanio',
+  projectName: 'beanio',
   themeConfig: {
     navbar: {
       title: 'BeanIO v3',
-      // logo: {
-      //   alt: 'BeanIO Logo',
-      //   src: 'img/logo.svg',
-      // },
+      logo: {
+        alt: 'BeanIO Logo',
+        src: 'img/logo.svg',
+      },
       items: [
         {
           to: 'docs/',
@@ -65,7 +65,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} BeanIO. Icons made by <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from <a href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a>`,
+      copyright: `Copyright © ${new Date().getFullYear()} BeanIO. Icons by <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from <a href="https://www.flaticon.com/" title="Flaticon">flaticon.com</a>, logo by <a href='https://www.freepik.com/vectors/logo'>sentavio</a> from <a href="https://www.freepik.com/">freepik.com</a>`,
     },
     prism: {
       additionalLanguages: ['java'],
