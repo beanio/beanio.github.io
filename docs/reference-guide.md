@@ -17,140 +17,47 @@ BeanIO is an open source Java framework for reading and writing Java objects fro
 input. BeanIO is well suited for batch processing, and currently supports XML, CSV, delimited and fixed length file
 formats. BeanIO is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
 
-### 1.1. What's new in 2.1?
+### 1.1. What's new in 3.0?
 
-BeanIO 2.1 includes the following significant enhancements:
+BeanIO 3.0 is the continuation of the BeanIO 2.x series. Because the original maintainer wasn't working on BeanIO
+anymore and seemed to be unreachable, we decided to fork the project and host it on GitHub Pages instead of
+beanio.org. Version 3.0 brings new exciting features like: 
 
-* Stream builder API for programmatically configuring a stream mapping
-* `@Group`, `@Record`, `@Segemnt` and `@Field` annotations.
-* Dynamic field occurrences based on a preceding field in the same record
-* Lazy collections
-* `java.util.Calendar` type handlers
-* Direct access to private variables and constructors
-* Configurable "locale" property on number, date and calendar type handlers
+* support for `java.time` types such as `LocalDateTime` and `ZonedDateTime`
+* `BeanWriter` now implements `AutoCloseable` to be used in try-with-resources
+* `BeanReader` now implements `Closeable` to be used in try-with-resources
+* an `Automatic-Module-Name` was added to `MANIFEST.MF` for BeanIO to be compatible with the Java Platform Module System
 
-### 1.2. Migrating from 2.0.x to 2.1
+### 1.2. Migrating from 2.x to 3.0
 
-Release 2.1 is "mostly" backwards compatible with prior 2.0.x releases. A few behavior changes are noted below that will
-hopefully improve your experience with BeanIO. Where noted, legacy behavior can be restored using `beanio.properties`
-configuration settings.
+Release 3.0 is almost backwards compatible with prior 2.x releases, with the following exceptions:
 
-* Prior to 2.1, repeating segments designated `lazy="true"` were unmarshalled as an empty collection. Going forward, a
-  collection will no longer be created if designated lazy and all items are null or the empty String.
-* XML components assigned a position will now be sorted by that position for determining the order to marshal the
-  components in. If need be, this can be disabled using the configuration setting `org.beanio.xml.sorted=false`.
-* If a null value is unmarshalled for a field bound to a primitive value, the value will be ignored instead of throwing
-  an error. The configuration setting `org.beanio.errorIfNullPrimitive=true` can be used to restore legacy behavior.
-* Fields assigned a default field value will now return the default value if missing from the input stream during
-  unmarshalling. The configuration setting `org.beanio.useDefaultIfMissing=false` can be used to restore legacy
-  behavior.
-* BeanIO will now access private/protected member variables and constructors unless configured
-  using `org.beanio.allowProtectedAccess=false`.
-
-### 1.3. Migrating from 1.2.x to 2.0
-
-Release 2.0 is not backwards compatible with prior releases. Sorry. This section contains the steps you'll need to
-follow to update your code and mapping files.
-
-#### 1.2.1. Java Changes
-
-The `org.beanio.BeanReaderContext` class was
-renamed [`RecordContext`](http://beanio.org/2.1/docs/api/org/beanio/RecordContext.html) in order to support bean objects
-bound to multiple records.
-
-The exception classes `org.beanio.BeanReaderException` and `org.beanio.BeanWriterException` are no longer abstract and
-may be thrown in a few rare (but fatal) scenarios. The exception classes `org.beanio.BeanReaderIOException`
-and `org.beanio.BeanWriterIOException` are now only thrown when the underlying input stream throws
-a `java.io.IOException`, or when a BeanReader/Writer method is invoked on a closed stream.
-
-The `org.beanio.stream.RecordReaderFactory` and `org.beanio.stream.RecordWriterFactory` interfaces have been
-consolidated into the [`RecordParserFactory`](http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html)
-interface, which is also used to
-create [`RecordMarshaller`](http://beanio.org/2.1/docs/api/org/beanio/stream/RecordMarshaller.html)
-and [`RecordUnmarshaller`](http://beanio.org/2.1/docs/api/org/beanio/stream/RecordUnmarshaller.html) implementations for
-parsing individual records.
-
-All type handlers and Spring related classes are unchanged or backwards compatible. Internal implementation classes have
-been moved to the `org.beanio.internal` package and their API may change in any release without further regard to
-backwards compatibility.
-
-#### 1.2.2. Mapping File Changes
-
-The mapping file namespace has changed to `http://www.beanio.org/2012/03` for all elements.
-
-Release 2.0 includes more lenient defaults for some mapping components. A new `stream` attribute called `strict` has
-been added to support some legacy behavior. If `strict` is set to true, the following behavior is enabled (which mimics
-prior releases):
-
-1. A default order is calculated for groups and records that do not have `order` explicitly set, based on the order they
-   appear in the mapping file.
-2. CSV, delimited and fixed length `record` elements will use default `minLength` and `maxLength` settings calculated
-   based on it's children. (If `strict` is false, release 2.0 defaults `minLength` to 0 and `maxLength` to `unbounded`.)
-
-The `ordered` attribute has been removed from a `stream`. Since release 2.0, all record and group components are
-unordered by default. The `order` attribute is still supported. If you want to continue validating record order, you can
-set `order` attributes on ordered groups and records, or set `strict` to true as described above to have BeanIO
-calculate a default order.
-
-The `reader` and `writer` elements have been combined into a single `parser` element. Format specific property names
-have not changed. If you have overridden the default `RecordReaderFactory` or `RecordWriterFactory`, you will need to
-modify your class to
-implement [`RecordParserFactory`](http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html) instead.
-
-The `minOccurs` attribute for a `record` now defaults to 0, instead of 1.
-
-All `bean` elements should be renamed `segment`. A `segment` element supports all the functionality of a `bean`
-element (and more).
-
-For XML formatted streams, the `minOccurs` attribute for a `bean/segment`, or a `field` bound to an XML element, will
-always default to 1. Prior to release 2.0, `minOccurs` defaulted to 0 if not nillable. (This is now consistent with XML
-Schema and hopefully simpler to remember.) The default `minOccurs` attribute for a `field` bound to an XML attribute
-remains 0.
-
-The `xmlWrapper` attribute has been removed. XML wrappers can be replaced by `segment` components.
-
-Mapping file changes are illustrated using an example in [Appendix C](#C).
-
-If desired, BeanIO's default `minOccurs` value for a group, record or field can be overridden using property values.
-See [Section 7.0 Configuration](#Configuration) for details.
+* a JDK 1.8+ is now required
+* the Maven `groupId` changed from `org.beanio` to `com.github.beanio`
 
 ## 2.0. Getting Started
 
-To get started with BeanIO, download the latest stable version from [Google Code](http://code.google.com/p/beanio/),
-extract the contents of the ZIP file, and add `beanio.jar` to your application's classpath.
+To get started with BeanIO, add `beanio.jar` to your application's classpath.
 
-BeanIO requires a version 1.5 JDK or higher. In order to process XML formatted streams, BeanIO also requires an XML
-parser based on the Streaming API for XML (StAX), as specified by [JSR 173](http://www.jcp.org/en/jsr/detail?id=173).
-JDK 1.6 and higher includes a StAX implementation and therefore does not require any additional libraries. JDK 1.5 users
-will need to include the following:
-
-* The StAX/JSR 173 API JAR, available from [Project SJSXP](http://sjsxp.java.net/).
-* A StAX implementation JAR. A reference implementation, used for BeanIO development and included in JDK 1.6, is
-  available from [Project SJSXP](http://sjsxp.java.net/).
-
-Alternatively, [Maven](http://maven.apache.org/) users can declare the following dependencies in their application's
-POM. Note that the version numbers used below are only examples and may have changed.
+In Maven projects:
 
 ```xml
-<!-- BeanIO dependency -->
-    <dependency>
-      <groupId>org.beanio</groupId>
-      <artifactId>beanio</artifactId>
-      <version>2.1.0</version>
-    </dependency>
-
-    <!-- StAX dependencies for JDK 1.5 users -->
-    <dependency>
-      <groupId>javax.xml</groupId>
-      <artifactId>jsr173</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.stream</groupId>
-      <artifactId>sjsxp</artifactId>
-      <version>1.0.2</version>
-    </dependency>
+<dependency>
+    <groupId>com.github.beanio</groupId>
+    <artifactId>beanio</artifactId>
+    <version>3.0.0.M1</version>
+</dependency>
 ```
+
+In Gradle projects:
+
+```groovy
+implementation 'com.github.beanio:beanio:3.0.0.M1'
+```
+
+BeanIO requires a version 1.8 JDK or higher. In order to process XML formatted streams, BeanIO also requires an XML
+parser based on the Streaming API for XML (StAX), as specified by [JSR 173](http://www.jcp.org/en/jsr/detail?id=173).
+JDK 1.6 and higher includes a StAX implementation and therefore does not require any additional libraries.
 
 ### 2.1. My First Stream
 
