@@ -142,12 +142,12 @@ public class BeanReaderExample {
         factory.load("mapping.xml");
         
         // use a StreamFactory to create a BeanReader
-        BeanReader in = factory.createReader("employeeFile", new File("employee.csv"));
-        Employee employee;
-        while ((employee = (Employee) in.read()) != null) {
-            // process the employee...
+        try (BeanReader in = factory.createReader("employeeFile", new File("employee.csv"))) {
+            Employee employee;
+            while ((employee = (Employee) in.read()) != null) {
+                // process the employee...
+            }
         }
-        in.close();
     }
 }
 ```
@@ -178,11 +178,11 @@ public class BeanWriterExample {
         employee.setHireDate(new Date());
         
         // use a StreamFactory to create a BeanWriter
-        BeanWriter out = factory.createWriter("employeeFile", new File("employee.csv"));
-        // write an Employee object directly to the BeanWriter
-        out.write(employee);
-        out.flush();
-        out.close();
+        try (BeanWriter out = factory.createWriter("employeeFile", new File("employee.csv"))) {
+            // write an Employee object directly to the BeanWriter
+            out.write(employee);
+            out.flush();
+        }
     }
 }
 ```
@@ -1828,8 +1828,7 @@ When an `InvalidRecordException` is thrown, the exception will contain the repor
 following code shows how this information can be accessed using the `RecordContext`.
 
 ```java
-    BeanReader in;
-    try {
+    try (BeanReader in = ...) {
         Object record = in.read();
         if (record != null) {
             // process record...
@@ -1858,9 +1857,8 @@ below shows how invalid records could be written to a reject file by extending `
 that the example assumes the mapping file does not bind a record group to a bean object.)
 
 ```java
-    BeanReader input;
-    BufferedWriter rejects;
-    try {
+    try (BeanReader input = ...;
+         BufferedWriter rejects = ...) {
         input.setErrorHandler(new BeanReaderErrorHandlerSupport() {
             public void invalidRecord(InvalidRecordException ex) throws Exception {
                 rejects.write(ex.getRecordContext().getRecordText());
@@ -1874,10 +1872,6 @@ that the example assumes the mapping file does not bind a record group to a bean
         }
 
         rejects.flush();
-    }
-    finally {
-        input.close();
-        rejects.close();
     }
 ```
 
