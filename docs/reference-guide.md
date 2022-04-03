@@ -197,7 +197,7 @@ Jennifer,Jones,Marketing,60000,01012011
 
 ### 3.1. BeanReader
 
-The [`org.beanio.BeanReader`](http://beanio.org/2.1/docs/api/org/beanio/BeanReader.html) interface, shown below, is used
+The [`org.beanio.BeanReader`](pathname:///api/org/beanio/BeanReader.html) interface, shown below, is used
 to read bean objects from an input stream. The `read()` method returns an unmarshalled bean object for the next record
 or group of records read from the input stream. When the end of the stream is reached, `null` is returned.
 
@@ -237,7 +237,7 @@ public interface BeanReader {
 
 ### 3.2. BeanWriter
 
-The [`org.beanio.BeanWriter`](http://beanio.org/2.1/docs/api/org/beanio/BeanWriter.html) interface, shown below, is used
+The [`org.beanio.BeanWriter`](pathname:///api/org/beanio/BeanWriter.html) interface, shown below, is used
 to write bean objects to an output stream. Calling the `write(Object)` method marshals a bean object to the output
 stream. In some cases where multiple record types are not discernible by class type or record identifying fields,
 the `write(String,Object)` method can be used to explicitly name the record type to marshal.
@@ -260,7 +260,7 @@ public interface BeanWriter {
 ```
 ### 3.3. Unmarshaller
 
-The [`org.beanio.Unmarshaller`](http://beanio.org/2.1/docs/api/org/beanio/Unmarshaller.html) interface, shown below, is
+The [`org.beanio.Unmarshaller`](pathname:///api/org/beanio/Unmarshaller.html) interface, shown below, is
 used to unmarshal a bean object from a `String` record.
 
 ```java
@@ -285,7 +285,7 @@ public interface Unmarshaller {
 ```
 ### 3.4. Marshaller
 
-The [`org.beanio.Marshaller`](http://beanio.org/2.1/docs/api/org/beanio/Marshaller.html) interface, shown below, is used
+The [`org.beanio.Marshaller`](pathname:///api/org/beanio/Marshaller.html) interface, shown below, is used
 to marshal a bean object into a `String` record.
 
 ```java
@@ -341,7 +341,7 @@ section ([4.0. The Mapping File](#TheMappingFile)).
 
 ### 3.6. StreamFactory
 
-The [`org.beanio.StreamFactory`](http://beanio.org/2.1/docs/api/org/beanio/StreamFactory.html) class is used to load
+The [`org.beanio.StreamFactory`](pathname:///api/org/beanio/StreamFactory.html) class is used to load
 mapping files and create `BeanReader`, `BeanWriter`, `Marshaller` and `Unmarshaller` instances. The following code
 snippet shows how to instantiate a `StreamFactory`, load a mapping file and create the various BeanIO parsers.
 The `load(...)` method loads mapping files from the file system (relative to the current working directory), while the
@@ -3066,7 +3066,7 @@ The stream builder API can be used to programatically create a stream mapping wi
 
 Like in a mapping file, components are assumed to be ordered as they are added to their parent, unless `at` (for fields)
 or `order` (for records and groups) is explicitly set. For more information, refer to the Javadocs for
-the [`org.beanio.builder`](http://beanio.org/2.1/docs/api/org/beanio/builder/package-summary.html) package.
+the [`org.beanio.builder`](pathname:///api/org/beanio/builder/package-summary.html) package.
 
 ### 6.2. Annotations
 
@@ -3331,7 +3331,7 @@ Attributes:
 ### A.3. `typeHandler`
 
 A `typeHandler` element is used to declare a custom field type handler that implements
-the [`org.beanio.types.TypeHandler`](http://beanio.org/docs/api/org/beanio/types/TypeHandler.html) interface. A type
+the [`org.beanio.types.TypeHandler`](pathname:///api/org/beanio/types/TypeHandler.html) interface. A type
 handler can be registered for a specific Java type, or registered for a Java type and stream format combination, or
 explicitly named.
 
@@ -3678,14 +3678,14 @@ Attributes:
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/RecordParserFactory.html">
+  <td>The fully qualified class name of the <a href="/api/org/beanio/stream/RecordParserFactory.html">
     <code>org.beanio.stream.RecordParserFactory</code></a> implementation
     to use for this stream.  If not specified, one of the following default factories is
     used based on the stream format:<br />
-    <br />csv - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/csv/CsvRecordParserFactory.html"><code>org.beanio.stream.csv.CsvRecordParserFactory</code></a>
-    <br />delimited - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/delimited/DelimitedRecordParserFactory.html"><code>org.beanio.stream.delimited.DelimitedRecordParserFactory</code></a>
-    <br />fixedlength - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/fixedlength/FixedLengthRecordParserFactory.html"><code>org.beanio.stream.fixedlength.FixedLengthRecordParserFactory</code></a>
-    <br />xml - <a href="http://beanio.org/2.1/docs/api/org/beanio/stream/xml/XmlRecordParserFactory.html"><code>org.beanio.stream.xml.XmlRecordParserFactory</code></a>
+    <br />csv - <a href="/api/org/beanio/stream/csv/CsvRecordParserFactory.html"><code>org.beanio.stream.csv.CsvRecordParserFactory</code></a>
+    <br />delimited - <a href="/api/org/beanio/stream/delimited/DelimitedRecordParserFactory.html"><code>org.beanio.stream.delimited.DelimitedRecordParserFactory</code></a>
+    <br />fixedlength - <a href="/api/org/beanio/stream/fixedlength/FixedLengthRecordParserFactory.html"><code>org.beanio.stream.fixedlength.FixedLengthRecordParserFactory</code></a>
+    <br />xml - <a href="/api/org/beanio/stream/xml/XmlRecordParserFactory.html"><code>org.beanio.stream.xml.XmlRecordParserFactory</code></a>
     <p>Overriding the record parser factory for XML is not supported (but also not prevented).</p>
   </td>
   <td>No</td>

@@ -22,6 +22,12 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
+        {
+          to: 'api/index.html',
+          activeBasePath: 'api',
+          label: 'API',
+          position: 'left',
+        },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/beanio/beanio',
