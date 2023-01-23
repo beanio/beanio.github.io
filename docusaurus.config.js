@@ -23,8 +23,7 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'api/index.html',
-          activeBasePath: 'api',
+          to: 'pathname:///api/index.html',
           label: 'API',
           position: 'left',
         },
