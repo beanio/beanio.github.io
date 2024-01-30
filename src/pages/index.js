@@ -59,7 +59,7 @@ function Home() {
   return (
     <Layout
       title='Home'
-      description="Description will go into a meta tag in <head />">
+      description="Marshalling and unmarshalling of Java beans from a flat file, stream, or simple `String` object">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <h1 className="hero__title">{siteConfig.title}</h1>
