@@ -45,14 +45,14 @@ In Maven projects:
 <dependency>
     <groupId>com.github.beanio</groupId>
     <artifactId>beanio</artifactId>
-    <version>3.0.0.M1</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
 In Gradle projects:
 
 ```groovy
-implementation 'com.github.beanio:beanio:3.0.0.M1'
+implementation 'com.github.beanio:beanio:3.0.0'
 ```
 
 BeanIO requires a version 1.8 JDK or higher. In order to process XML formatted streams, BeanIO also requires an XML
@@ -389,27 +389,31 @@ A `BeanReaderException` is further broken down into the following subclasses thr
 </tr>
 <tr>
   <td><code>MalformedRecordException</code></td>
-  <td>Thrown when the underlying input stream is malformed based on the configured
+  <td>
+    Thrown when the underlying input stream is malformed based on the configured
     stream format, and therefore a record could not be accurately read from the
     stream.  In many cases, further reads from the input stream will be unsuccessful.
   </td>
 </tr>
 <tr>
   <td><code>UnidentifiedRecordException</code></td>
-  <td>Thrown when a record does not match any record definition configured in the 
+  <td>
+    Thrown when a record does not match any record definition configured in the 
     mapping file.  If the stream layout does not strictly enforce record
     sequencing, further reads from the input stream are likely to be successful.
   </td>
 </tr>
 <tr>
   <td><code>UnexpectedRecordException</code></td>
-  <td>Thrown when a record is read out of order.  Once record sequencing is violated,
+  <td>
+    Thrown when a record is read out of order.  Once record sequencing is violated,
     further reads from the input stream are likely to be unsuccessful.
   </td>
 </tr>
 <tr>
   <td><code>InvalidRecordException</code></td>
-  <td>Thrown when a record is matched, but the record is invalid for one of the following
+  <td>
+    Thrown when a record is matched, but the record is invalid for one of the following
     reasons:
     <ul>
       <li>A record level validation failed</li>
@@ -422,7 +426,8 @@ A `BeanReaderException` is further broken down into the following subclasses thr
 </tr>
 <tr>
   <td><code>InvalidRecordGroupException</code></td>
-  <td>Extends from <code>InvalidRecordException</code> and is thrown when one or more records in a group 
+  <td>
+    Extends from <code>InvalidRecordException</code> and is thrown when one or more records in a group 
     (that are mapped to a single bean object) are invalid.  This exception has no effect on the state of the <code>BeanReader</code> and further reads 
     from the input stream can be safely performed.
   </td>
@@ -607,10 +612,10 @@ The following properties can be used to customize default CSV parsers:
 <tr>
   <td><code>whitespaceAllowed</code></td>
   <td>boolean</td>
-  <td>If set to <code>true</code>, whitespace is ignored and allowed before and after 
+  <td>
+  If set to <code>true</code>, whitespace is ignored and allowed before and after 
   quoted values.  For example, the following is allowed:
-  <pre>
-    Jennifer, "Jones" ,24</pre>
+  <pre>Jennifer, "Jones" ,24</pre>
   Defaults to <code>false</code>.
   </td>
   <td><code>BeanReader, Unmarshaller</code></td>
@@ -618,11 +623,11 @@ The following properties can be used to customize default CSV parsers:
 <tr>
   <td><code>unquotedQuotesAllowed</code></td>
   <td>boolean</td>
-  <td>If set to <code>true</code>, field text containing quotation marks do not need to 
+  <td>
+    If set to <code>true</code>, field text containing quotation marks do not need to 
     be quoted unless the field text starts with a quotation mark.  For example, the
     following is allowed:
-    <pre>
-    Jennifer,She said "OK"</pre>
+    <pre>Jennifer,She said "OK"</pre>
     Defaults to <code>false</code>.
   </td>  
   <td><code>BeanReader, Unmarshaller</code></td>
@@ -640,8 +645,7 @@ The following properties can be used to customize default CSV parsers:
   <td><code>alwaysQuote</code></td>
   <td>boolean</td>
   <td>If set to <code>true</code>, field text is always quoted.  By default, a field is only quoted
-  if it contains a delimeter, a quotation mark or new line characters.
-  </td>
+  if it contains a delimeter, a quotation mark or new line characters.</td>
   <td><code>BeanWriter, Marshaller</code></td>
 </tr>
 </tbody>
@@ -1148,14 +1152,18 @@ alias `integer` or `int`.
 <tr><td>java.lang.Double</td><td>double</td><td><code>double</code></td></tr>
 <tr><td>java.math.BigInteger</td><td>-</td><td><code>biginteger</code></td></tr>
 <tr><td>java.math.BigDecimal</td><td>-</td><td><code>bigdecimal</code><br /><code>decimal</code></td></tr>
-<tr><td>java.util.Date<sup>1</sup></td><td>-</td>
+<tr>
+  <td>java.util.Date<sup>1</sup></td>
+  <td>-</td>
   <td>
     <code>datetime</code><br />
     <code>date</code><br />
     <code>time</code>
   </td>
 </tr>
-<tr><td>java.util.Calendar<sup>2</sup></td><td>-</td>
+<tr>
+  <td>java.util.Calendar<sup>2</sup></td>
+  <td>-</td>
   <td>
     <code>calendar</code><br />
     <code>calendar-datetime</code><br />
@@ -2534,29 +2542,47 @@ for `none` which is not covered here.
   <th>Sample Record</th>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="element"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+        &lt;record name="person" className="map"&gt;
+          &lt;field name="name" <span className="highlight">xmlType="element"</span>/&gt;
+        &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person&gt;
-  &lt;name&gt;John&lt;/name&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+        &lt;person&gt;
+            &lt;name&gt;John&lt;/name&gt;
+        &lt;/person&gt;
+    </pre>
 </td>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="attribute"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+        &lt;record name="person" className="map"&gt;
+            &lt;field name="name" <span className="highlight">xmlType="attribute"</span>/&gt;
+        &lt;/recors&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person name="John"/&gt;</pre>
+  <td>
+    <pre>
+        &lt;person name="John"/&gt;
+    </pre>
 </td>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="text"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+        &lt;record name="person" className="map"&gt;
+            &lt;field name="name" <span className="highlight">xmlType="text"</span>/&gt;
+        &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person&gt;John&lt;/person&gt;</pre>
+  <td>
+    <pre>
+        &lt;person&gt;John&lt;/person&gt;
+    </pre>
 </td>
 </tr>
 </tbody>
@@ -2619,58 +2645,78 @@ This behavior is illustrated in the following table.
 </tr>
 <tr>
   <td rowSpan="3"><pre>element</pre></td>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" /&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+        &lt;field name="name" /&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person&gt;
-  &lt;name/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;person&gt;
+        &lt;name/&gt;
+    &lt;/person&gt;
+    </pre>
 </td>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">minOccurs="0"</span> /&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+        &lt;field name="name" <span className="highlight">minOccurs="0"</span> /&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person/&gt;</pre>
-</td>
+  <td><pre>&lt;person/&gt;</pre></td>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">nillable="true"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+        &lt;field name="name" <span className="highlight">nillable="true"</span>/&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person&gt;
-  &lt;name xsi:nil="true"/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;person&gt;
+        &lt;name xsi:nil="true"/&gt;
+    &lt;/person&gt;
+    </pre>
 </td>
 </tr>
 <tr>
   <td rowSpan="2"><pre>attribute</pre></td>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="attribute"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+        &lt;field name="name" <span className="highlight">xmlType="attribute"</span>/&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person/&gt;</pre>
-</td>
+  <td><pre>&lt;person/&gt;</pre></td>
 </tr>
 <tr>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="attribute" minOccurs="1"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+        &lt;field name="name" <span className="highlight">xmlType="attribute" minOccurs="1"</span>/&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person name=""/&gt;</pre>
-</td>
+  <td><pre>&lt;person name=""/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>text</pre></td>
-  <td><pre>&lt;record name="person" className="map"&gt;
-  &lt;field name="name" <span className="highlight">xmlType="text"</span>/&gt;
-&lt;/person&gt;</pre>
+  <td>
+    <pre>
+    &lt;record name="person" className="map"&gt;
+    &lt;field name="name" <span className="highlight">xmlType="text"</span>/&gt;
+    &lt;/record&gt;
+    </pre>
   </td>
-  <td><pre>&lt;person/&gt;</pre>
-</td>
+  <td><pre>&lt;person/&gt;</pre></td>
 </tr>
 </tbody>
 </table>
@@ -2875,97 +2921,78 @@ of `minOccurs` and `nillable` when marshalling null field values.
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td rowSpan="5"><pre>&lt;wrapper&gt;
   &lt;field&gt;value&lt;/field&gt;
-&lt;/wrapper&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
   <td><pre>&lt;wrapper&gt;
   &lt;field/&gt;
-&lt;/wrapper&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">minOccurs="0"</span>&gt;
   &lt;field name="field" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td><pre>-</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">nillable="true"</span>&gt;
   &lt;field name="field" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
-  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre>
-</td>
+&lt;/segment&gt;</pre></td>
+  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" <span className="highlight">nillable="true"</span> /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td><pre>&lt;wrapper&gt;
   &lt;field xsi:nil="true"/&gt;
-&lt;/wrapper&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" <span className="highlight">minOccurs="0"</span>/&gt;
-&lt;/segment&gt;</pre>
-  </td>
-  <td><pre>&lt;wrapper/&gt;</pre>
-</td>
+&lt;/segment&gt;</pre></td>
+  <td><pre>&lt;wrapper/&gt;</pre></td>
 </tr>
 
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" xmlType="attribute" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td rowSpan="3"><pre>&lt;wrapper field="value"/&gt;</pre></td>
   <td><pre>&lt;wrapper/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" xmlType="attribute" <span className="highlight">minOccurs="1"</span> /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td><pre>&lt;wrapper field=""/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">minOccurs="0"</span>&gt;
   &lt;field name="field" xmlType="attribute" minOccurs="1" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td><pre>-</pre></td>
 </tr>
 
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" xmlType="text" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
-  <td rowSpan="3"><pre>&lt;wrapper&gt;value&lt;/wrapper&gt;</pre>
-</td>
-  <td><pre>&lt;wrapper/&gt;</pre>
-</td>
+&lt;/segment&gt;</pre></td>
+  <td rowSpan="3"><pre>&lt;wrapper&gt;value&lt;/wrapper&gt;</pre></td>
+  <td><pre>&lt;wrapper/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">nillable="true"</span>&gt;
   &lt;field name="field" xmlType="text" /&gt;
-&lt;/segment&gt;</pre>
-  </td>
-  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre>
-</td>
+&lt;/segment&gt;</pre></td>
+  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">minOccurs="0"</span>&gt;
   &lt;field name="field" xmlType="text"/&gt;
-&lt;/segment&gt;</pre>
-  </td>
+&lt;/segment&gt;</pre></td>
   <td><pre>-</pre></td>
 </tr>
 </tbody>
@@ -2984,43 +3011,35 @@ Similarly, a `segment` can be used to wrap a repeating field as illustrated belo
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" collection="list"
     <span className="highlight">minOccurs="0"</span> maxOccurs="10" /&gt;
-&lt;/segment name="wrapper"&gt;</pre>
-  </td>
+&lt;/segment name="wrapper"&gt;</pre></td>
   <td rowSpan="4"><pre>&lt;wrapper&gt;
   &lt;field&gt;value1&lt;/field&gt;
   &lt;field&gt;value2&lt;/field&gt;
-&lt;/wrapper&gt;</pre>
-</td>
-  <td><pre>&lt;wrapper /&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
+  <td><pre>&lt;wrapper /&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper"&gt;
   &lt;field name="field" collection="list"
     <span className="highlight">minOccurs="1"</span> maxOccurs="10" /&gt;
-&lt;/wrapper&gt;</pre>
-  </td>
+&lt;/wrapper&gt;</pre></td>
   <td><pre>&lt;wrapper&gt;
   &lt;field/&gt;
-&lt;/wrapper&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">minOccurs="0"</span>&gt;
   &lt;field name="field" collection="list"
     minOccurs="1" maxOccurs="10" /&gt;
-&lt;/wrapper&gt;</pre>
-  </td>
+&lt;/wrapper&gt;</pre></td>
   <td><pre>-</pre></td>
 </tr>
 <tr>
   <td><pre>&lt;segment name="wrapper" <span className="highlight">nillable="true"</span>&gt;
   &lt;field name="field" collection="list"
     minOccurs="1" maxOccurs="10" /&gt;
-&lt;/wrapper&gt;</pre>
-  </td>
-  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre>
-</td>
+&lt;/wrapper&gt;</pre></td>
+  <td><pre>&lt;wrapper xsi:nil="true"/&gt;</pre></td>
 </tr>
 </tbody>
 </table>
@@ -3195,8 +3214,7 @@ The following configuration settings are supported by BeanIO:
 <tr>
   <td><code>org.beanio.marshalDefaultEnabled</code></td>
   <td>Whether a configured <a href="#field"><code>field</code></a> default is marshalled for null property values.
-    May be disabled for backwards compatibility by setting the value to <code>false</code>.
-    </td>
+    May be disabled for backwards compatibility by setting the value to <code>false</code>.</td>
   <td><code>true</code></td>
 </tr>
 <tr>
@@ -3349,8 +3367,7 @@ explicitly named.
   <td><code>type</code></td>
   <td>The fully qualified classname or type alias to register the type handler for.
     If <code>format</code> is also set, the type handler will only be used
-    by streams that match the configured format.
-    </td>
+    by streams that match the configured format.</td>
   <td>One of <code>name</code> or <code>type</code> is required.</td>
 </tr>
 <tr>
@@ -3377,7 +3394,7 @@ A `property` element has several uses.
 
 1. When used at the top of a mapping file as a direct child of [`beanio`](#beanio), a `property` may declare properties
    to use for property substitution in other attributes within the mapping file. Property substitution uses the
-   syntax \`${propertyName,default}\`, where all whitespace between the brackets is retained. Properties cannot be
+   syntax `${propertyName,default}`, where all whitespace between the brackets is retained. Properties cannot be
    imported from another file.
 2. Or, a `property` element may be used to customize other elements, such as a [`typeHandler`](#typeHandler)
    or [`parser`](#parser).
@@ -3397,7 +3414,8 @@ A `property` element has several uses.
 </tr>
 <tr>
   <td><code>value</code></td>
-  <td>The property value.
+  <td>
+    The property value.
     <p>When used to customize a <a href="#typeHandler"><code>typeHandler</code></a>
       or <a href="#parser"><code>parser</code></a>, default type handlers only are used to convert
       property text to an object value.  String and Character type property values can use the following escape
@@ -3466,7 +3484,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>format</code></td>
-  <td>The decimal format pattern for <code>Number</code> type properties, or the simple
+  <td>
+    The decimal format pattern for <code>Number</code> type properties, or the simple
     date format pattern for <code>Date</code> type properties.
     <p>The <code>format</code> value can accessed by any custom type handler that
     implements <code>ConfigurableTypeHandler</code>.</p>
@@ -3561,7 +3580,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>mode</code></td>
-  <td>By default, a stream mapping can be used for both reading input streams and writing
+  <td>
+    By default, a stream mapping can be used for both reading input streams and writing
     output streams, called <code>readwrite</code> mode.  Setting mode to <code>read</code> or
     <code>write</code> instead, respectively restricts usage to a <code>BeanReader</code> or a
     <code>BeanWriter</code> only, but relaxes some validations on the mapping configuration.
@@ -3607,14 +3627,14 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.
-  </td>
+    that uses <a href="#range">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>ignoreUnidentified Records</code></td>
-  <td>If set to true, BeanIO will skip records that cannot be identified, otherwise
+  <td>
+    If set to true, BeanIO will skip records that cannot be identified, otherwise
     an <code>UnidentifiedRecordException</code> is thrown.  This feature is not recommended
     for use with record groups, since a record sequencing error could cause large portions
     of a stream to go unprocessed without any exception.
@@ -3672,7 +3692,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the <a href="/api/org/beanio/stream/RecordParserFactory.html">
+  <td>
+    The fully qualified class name of the <a href="/api/org/beanio/stream/RecordParserFactory.html">
     <code>org.beanio.stream.RecordParserFactory</code></a> implementation
     to use for this stream.  If not specified, one of the following default factories is
     used based on the stream format:<br />
@@ -3711,7 +3732,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the bean object mapped to this group.  A <code>class</code>
+  <td>
+    The fully qualified class name of the bean object mapped to this group.  A <code>class</code>
     may be bound to a group when its marshalled form spans multiple consecutive records.
     <p>During umarshalling, if any record in the group fails validation, an
     <code>InvalidRecordGroupException</code> is thrown.</p>
@@ -3721,7 +3743,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>value<br /><del>target</del></code></td>
-  <td>The name of a child component (typically a record) to return in lieu of an assigned class.
+  <td>
+    The name of a child component (typically a record) to return in lieu of an assigned class.
     <p>There can be only one iteration of the named value.  For example, if a repeating segment
     bound to a collection contains a repeating field (also bound to a collection), the segment
     can be targeted, but the field cannot.</p>
@@ -3731,7 +3754,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>collection</code></td>
-  <td>The collection type for repeating groups bound to a parent bean object (configured on
+  <td>
+    The collection type for repeating groups bound to a parent bean object (configured on
     a <a href="#group"><code>group</code></a>).  The value may be set to any fully qualified class name
     assignable to <code>java.util.Collection</code>,
     or to one of the collection type aliases: <code>list</code>, <code>set</code> or <code>array</code>.
@@ -3759,7 +3783,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>order</code></td>
-  <td>The order this group must appear within its parent group or stream.
+  <td>
+    The order this group must appear within its parent group or stream.
     <p>If <code>strict</code> is set to true at the stream level, <code>order</code> will default
     to the order assigned to its preceding sibling plus one (i.e. the record or group that
     shares the same parent), or 1 if this group is the first child in its parent group or stream.
@@ -3788,8 +3813,7 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.
-  </td>
+    that uses <a href="#range">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
@@ -3848,7 +3872,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the bean object mapped to this record.
+  <td>
+    The fully qualified class name of the bean object mapped to this record.
     <p>If set to <code>map</code> or
     any <code>java.util.Map</code> implementation, a Map object will be used with field names
     for keys and field values for values.</p>
@@ -3864,7 +3889,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>value<br /><del>target</del></code></td>
-  <td>The name of a child segment or field to return in lieu of an assigned class.
+  <td>
+    The name of a child segment or field to return in lieu of an assigned class.
     <p>There can be only one iteration of a named value.  For example, if a repeating segment
     bound to a collection contains a repeating field (also bound to a collection), the segment
     can be targeted, but the field cannot.</p>
@@ -3893,7 +3919,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>collection</code></td>
-  <td>The collection type for repeating records bound to a parent bean object (configured on
+  <td>
+    The collection type for repeating records bound to a parent bean object (configured on
     a <a href="#group"><code>group</code></a>).  The value may be set to any fully qualified class name
     assignable to <code>java.util.Collection</code> or <code>java.util.Map</code>,
     or to one of the collection type aliases: <code>list</code>, <code>set</code>, <code>map</code> or <code>array</code>.
@@ -3906,14 +3933,14 @@ Attributes:
 <tr>
   <td><code>key</code></td>
   <td>The name of a descendant field to use for the Map key when <code>collection</code>
-    is assignable to a <code>java.util.Map</code>.
-  </td>
+    is assignable to a <code>java.util.Map</code>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>order</code></td>
-  <td>The order this record must appear within its parent group or stream.
+  <td>
+    The order this record must appear within its parent group or stream.
     <p>If <code>strict</code> is set to true at the stream level, <code>order</code> will default
     to the order assigned to its preceding sibling plus one (i.e. the record or group that
     shares the same parent), or 1 if this record is the first child in its parent group or stream.
@@ -3942,14 +3969,14 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.
-  </td>
+    that uses <a href="#range">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>lazy</code></td>
-  <td>If set to <code>true</code>, the class or collection bound to this record will only be
+  <td>
+    If set to <code>true</code>, the class or collection bound to this record will only be
     instantiated if at least one child attribute is not null or the empty String.
     Defaults to <code>false</code>.  [Only applies if this record is bound to an attribute
     of a parent group.]
@@ -3960,14 +3987,14 @@ Attributes:
 <tr>
   <td><code>template</code></td>
   <td>The name of the template to include.  The template is added to the record layout
-    before any child of this record.
-  </td>
+    before any child of this record.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>ridLength</code></td>
-  <td>The expected length of this record for identifying it.  The value uses
+  <td>
+    The expected length of this record for identifying it.  The value uses
     <a href="#range">range notation</a>.
     <p>If the stream format is <code>delimited</code> or <code>csv</code>, record length is measured by
      number of fields.  If the stream format is <code>fixedlength</code>, record length is measured in characters.</p>
@@ -3977,7 +4004,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>minLength</code></td>
-  <td>If the stream format is <code>delimited</code> or <code>csv</code>, <code>minLength</code> is the minimum number
+  <td>
+    If the stream format is <code>delimited</code> or <code>csv</code>, <code>minLength</code> is the minimum number
     of fields required by this record.  If <code>strict</code> is true, defaults to the number of fields defined
     for the record, otherwise 0.
     <p>If the stream format is <code>fixedlength</code>, <code>minLength</code> is the minimum number
@@ -3989,7 +4017,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>maxLength</code></td>
-  <td>If the stream format is <code>delimited</code> or <code>csv</code>, <code>maxLength</code> is the maximum number
+  <td>
+    If the stream format is <code>delimited</code> or <code>csv</code>, <code>maxLength</code> is the maximum number
     of fields allowed by this record.  If <code>strict</code> is true, defaults to the number of fields defined
     for the record, or if no fields are declared or <code>strict</code> is false, then <code>unbounded</code>.
     <p>If the stream format is <code>fixedlength</code>, <code>maxLength</code> is the maximum number
@@ -4049,7 +4078,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>class</code></td>
-  <td>The fully qualified class name of the bean object bound to this segment.
+  <td>
+    The fully qualified class name of the bean object bound to this segment.
     If set to <code>map</code> or any <code>java.util.Map</code> implementation, a Map object will
     be used with field/segment names for keys and field/segment values for values.
   </td>
@@ -4058,7 +4088,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>value</code><br/><del><code>target</code></del></td>
-  <td>The name of a child segment or field to return in lieu of an assigned class.
+  <td>
+    The name of a child segment or field to return in lieu of an assigned class.
     If set, all other descendants are not bound to the parent bean property.
   </td>
   <td>No</td>
@@ -4082,7 +4113,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>collection</code></td>
-  <td>The collection type for repeating segments bound to a parent bean object.
+  <td>
+    The collection type for repeating segments bound to a parent bean object.
     The value may be set to any fully qualified class name
     assignable to <code>java.util.Collection</code> or <code>java.util.Map</code>,
     or to one of the collection type aliases: <code>list</code>, <code>set</code>, <code>map</code>
@@ -4103,7 +4135,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>key</code></td>
-  <td>The name of a descendant field to use for the Map key when <code>collection</code>
+  <td>
+    The name of a descendant field to use for the Map key when <code>collection</code>
     is assignable to a <code>java.util.Map</code>.
   </td>
   <td>No</td>
@@ -4111,7 +4144,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>minOccurs</code></td>
-  <td>The minimum consecutive occurrences of this segment.  Defaults to 1.
+  <td>
+    The minimum consecutive occurrences of this segment.  Defaults to 1.
     <p>If <code>minOccurs</code> is 0, a null bean object bound to this segment will
      not be marshalled (unless a subsequent field is marshalled for CSV, delimited and
      fixed legnth stream formats)</p>
@@ -4123,7 +4157,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>maxOccurs</code></td>
-  <td>The maximum consecutive occurrences of this segment.  By default,
+  <td>
+    The maximum consecutive occurrences of this segment.  By default,
     <code>maxOccurs</code> is set to <code>minOccurs</code> or 1, whichever is greater.
     If there is no limit to the number of occurrences, the value may
     be set to <code>unbounded</code>.
@@ -4140,14 +4175,14 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.
-  </td>
+    that uses <a href="#range">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>occursRef</code></td>
-  <td>The name of a preceding field in the same record that controls the number
+  <td>
+    The name of a preceding field in the same record that controls the number
     of occurrences of this segment.  If the controlling field is not bound to a
     separate property (i.e. <code>ignore="true"</code>), its automatically set based on the
     size of the segment collection during marshalling.
@@ -4157,7 +4192,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>lazy</code></td>
-  <td>If set to <code>true</code>, the class or collection bound to this segment will only be
+  <td>
+  If set to <code>true</code>, the class or collection bound to this segment will only be
     instantiated if at least one child attribute is not null or the empty String.
     Defaults to <code>false</code>.  This functionality differs from <code>minOccurs</code>
     in that the fields may still exist in the input stream.
@@ -4168,8 +4204,7 @@ Attributes:
 <tr>
   <td><code>template</code></td>
   <td>The name of the template to include.  The template is added to the layout
-    before any child of this segment.
-  </td>
+    before any child of this segment.</td>
   <td>No</td>
   <td>*</td>
 </tr>
@@ -4246,7 +4281,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>setter</code></td>
-  <td>The setter method used to set the property value of this field on its parent bean class.
+  <td>
+    The setter method used to set the property value of this field on its parent bean class.
     By default, the setter method is determined through introspection using
     the field name.
     <p>If the field is a constructor argument, <code>setter</code> may be set to '#N', where
@@ -4257,7 +4293,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>rid</code></td>
-  <td>Record identifier indicator.  Set to <code>true</code> if this field is used to identify a record.
+  <td>
+    Record identifier indicator.  Set to <code>true</code> if this field is used to identify a record.
     More than one field can be used to identify a record.  Defaults to <code>false</code>.
     <p>Record identifying fields must have <code>regex</code> or <code>literal</code> configured
     to match a record, unless the field is a named XML element or attribute.</p>
@@ -4267,15 +4304,18 @@ Attributes:
 </tr>
 <tr>
   <td><code>at</code><br /><code>position</code></td>
-  <td>For delimited and CSV formatted streams, <code>position</code> (or <code>at</code>) is the index of the field
+  <td>
+    For delimited and CSV formatted streams, <code>position</code> (or <code>at</code>) is the index of the field
     within the record, beginning at 0.  And for fixed length formatted streams, <code>position</code>
     is the index of the first character of the field within the record, beginning at 0.
     <p>
     Negative numbers can be used to indicate the position is relative to the end of the record.
-    For example, the position -2 indicates the second to last field in a delimited record.</p>
+    For example, the position -2 indicates the second to last field in a delimited record.
+    </p>
     <p>
     If the field repeats, or the field belongs to a segment that repeats,
-    <code>position</code> should be set based on the first occurrence of the field in a record.</p>
+    <code>position</code> should be set based on the first occurrence of the field in a record.
+    </p>
     <p>
     A position must be specified for all fields in a record, or for none at all.  If positions
     are not specified, BeanIO will automatically calculate field positions based on the order
@@ -4294,7 +4334,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>until</code></td>
-  <td>The maximum position of the field in the record.  Only applies to fields that repeat
+  <td>
+    The maximum position of the field in the record.  Only applies to fields that repeat
     where the number of occurrences is indeterminate (i.e. <code>maxOccurs</code> is greater
     than <code>minOccurs</code>).  <code>until</code> must always be specified relative to the end
     of the record, and is therefore always a negative number.
@@ -4311,7 +4352,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>lazy</code></td>
-  <td>Set to true to convert empty field text to null before type conversion.  For repeating
+  <td>
+    Set to true to convert empty field text to null before type conversion.  For repeating
     fields bound to a collection, the collection will not be created if all field values
     are null or the empty String.  Defaults to false.
   </td>
@@ -4376,7 +4418,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>collection</code></td>
-  <td>If a repeating field is bound to a collection object, <code>collection</code>
+  <td>
+    If a repeating field is bound to a collection object, <code>collection</code>
     is the fully qualified class name of the <code>java.util.Collection</code> implementation,
     or a collection type alias.  When a <code>collection</code> is configured, the <code>type</code> attribute
     is used to declare the property type of an item stored in the collection.
@@ -4389,7 +4432,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>minOccurs</code></td>
-  <td>The minimum consecutive occurrences of this field in a record.  Defaults to 1, with one
+  <td>
+    The minimum consecutive occurrences of this field in a record.  Defaults to 1, with one
     exception: a field in an XML formatted stream bound to an attribute defaults to 0.
 
     <p><code>minOccurs</code> controls whether a field is marshalled for a null field value, and
@@ -4401,7 +4445,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>maxOccurs</code></td>
-  <td>The maximum consecutive occurrences of this field in a record.  By default,
+  <td>
+    The maximum consecutive occurrences of this field in a record.  By default,
     <code>maxOccurs</code> is set to <code>minOccurs</code> or 1, whichever is greater.  If overridden
     for a non-XML stream format, the value can only exceed <code>minOccurs</code> if this is the last field
     in the record.  The value may be set to <code>unbounded</code> if there is no limit to the
@@ -4415,14 +4460,14 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.
-  </td>
+    that uses <a href="#range">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
 <tr>
   <td><code>occursRef</code></td>
-  <td>The name of a preceding field in the same record that controls the number
+  <td>
+    The name of a preceding field in the same record that controls the number
     of occurrences of this field.  If the controlling field is not bound to a
     separate property (i.e. <code>ignore="true"</code>), its automatically set based on the
     size of the field collection during marshalling.
@@ -4432,7 +4477,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>format</code></td>
-  <td>The decimal format pattern for <code>java.lang.Number</code> field values, or the simple
+  <td>
+    The decimal format pattern for <code>java.lang.Number</code> field values, or the simple
     date format pattern for <code>java.util.Date</code> field properties.
     <p>The <code>format</code> value can also be accessed by any custom type handler that
     implements <code>org.beanio.types.ConfigurableTypeHandler</code>.</p>
@@ -4458,7 +4504,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>length</code></td>
-  <td>The padded length of this field measured in characters.  Length is required for fixed
+  <td>
+    The padded length of this field measured in characters.  Length is required for fixed
     length formatted streams, and can be set for fields in other stream formats (along with
     a padding character) to enable field padding.
     <p>The length of the last field in a fixed length record may be set to <code>unbounded</code>
@@ -4470,7 +4517,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>padding</code></td>
-  <td>The character used to pad this field.  For fixed length formatted streams,
+  <td>
+    The character used to pad this field.  For fixed length formatted streams,
     <code>padding</code> defaults to a space.  For non-fixed length formatted streams,
     padding is disabled unless a padding character and length are specified.
 
@@ -4482,8 +4530,7 @@ Attributes:
     is accepted regardless of the padding character.  If
     <code>required</code> is true, a required field validation error is triggered.  And when
     marshalling a null field value, if <code>required</code> is false,
-    the field text is formatted as spaces regardless of the configured padding character.
-    </p>
+    the field text is formatted as spaces regardless of the configured padding character.</p>
 
     <p>In other stream formats that are not fixed length, null field values are
     unmarshalled and marshalled as empty strings when <code>required</code> is false.
@@ -4517,11 +4564,13 @@ Attributes:
 </tr>
 <tr>
   <td><code>xmlType</code></td>
-  <td>The XML node type mapped to this field.  The type can be set to <code>element</code> (default)
+  <td>
+  The XML node type mapped to this field.  The type can be set to <code>element</code> (default)
   to map this field to an XML element, <code>attribute</code> to map to an XML attribute, or <code>text</code>
   to map the field value to the enclosed text of it's parent record or segment.
 
-  <p>When set to <code>text</code>, <code>xmlName</code> and <code>xmlNamespace</code> have no effect.</p></td>
+  <p>When set to <code>text</code>, <code>xmlName</code> and <code>xmlNamespace</code> have no effect.</p>
+  </td>
   <td>No</td>
   <td>xml</td>
 </tr>
@@ -4547,7 +4596,8 @@ Attributes:
 </tr>
 <tr>
   <td><code>nillable</code></td>
-  <td>Set to <code>true</code> if the W3C Schema Instance attribute <code>nil</code> should be
+  <td>
+    Set to <code>true</code> if the W3C Schema Instance attribute <code>nil</code> should be
     set to true when the marshalled field value is null.  Defaults to <code>false</code>.
     Unmarshalling a non-nillalbe field where <code>nil="true"</code> will cause an
     <code>InvalidRecordException</code>.
