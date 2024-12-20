@@ -45,14 +45,14 @@ In Maven projects:
 <dependency>
     <groupId>com.github.beanio</groupId>
     <artifactId>beanio</artifactId>
-    <version>3.0.0</version>
+    <version>3.2.0</version>
 </dependency>
 ```
 
 In Gradle projects:
 
 ```groovy
-implementation 'com.github.beanio:beanio:3.0.0'
+implementation 'com.github.beanio:beanio:3.2.0'
 ```
 
 BeanIO requires a version 1.8 JDK or higher. In order to process XML formatted streams, BeanIO also requires an XML
@@ -3170,118 +3170,28 @@ java -Dorg.beanio.configuration=config/settings.properties example.Main
 
 The following configuration settings are supported by BeanIO:
 
-<table className="indent">
-<tbody>
-<tr>
-  <th>Property</th>
-  <th>Description</th>
-  <th>Default</th>
-</tr>
-<tr>
-  <td><code>org.beanio.allowProtectedAccess</code></td>
-  <td>Whether private and protected class variables and constructors can be accessed (i.e.
-    make accessible using the reflection API).</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.lazyIfEmpty</code></td>
-  <td>Whether objects are lazily instantiated if String properties are empty (and not just null).</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.errorIfNullPrimitive</code></td>
-  <td>Whether null field values will cause an exception if bound to a primitive property.</td>
-  <td><code>false</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.useDefaultIfMissing</code></td>
-  <td>Whether default values apply to fields missing from the stream.</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.propertyEscapingEnabled</code></td>
-  <td>Whether <a href="#property"><code>property</code></a> values (for <code>typeHandler</code>, <code>reader</code>
-    and <code>writer</code> elements) support escape patterns for line feeds, carriage returns, tabs, etc.
-    Set to <code>true</code> or <code>false</code>.</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.nullEscapingEnabled</code></td>
-  <td>Whether the null character can be escaped using <code>\0</code> when property escaping is enabled.
-    Set to <code>true</code> or <code>false</code>.</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.marshalDefaultEnabled</code></td>
-  <td>Whether a configured <a href="#field"><code>field</code></a> default is marshalled for null property values.
-    May be disabled for backwards compatibility by setting the value to <code>false</code>.</td>
-  <td><code>true</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.defaultTypeHandlerLocale</code></td>
-  <td>Sets the default type handler locale.</td>
-  <td><code>Locale.getDefault()</code></td>
-</tr>
-
-<tr>
-  <td><code>org.beanio.defaultDateFormat</code></td>
-  <td>Sets the default <code>SimpleDateFormat</code> pattern for <code>date</code> and
-    <code>calendar-date</code> type fields in
-    CSV, delimited and fixed length file formats.</td>
-  <td><code>DateFormat. getDateInstance()</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.defaultDateTimeFormat</code></td>
-  <td>Sets the default <code>SimpleDateFormat</code> pattern for <code>datetime</code>,
-    <code>calendar-datetime</code> and <code>calendar</code> type fields in
-    CSV, delimited and fixed length file formats..</td>
-  <td><code>DateFormat. getDateTimeInstance()</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.defaultTimeFormat</code></td>
-  <td>Sets the default <code>SimpleDateFormat</code> pattern for <code>time</code> and
-    <code>calendar-time</code> type fields in
-    CSV, delimited and fixed length file formats..</td>
-  <td><code>DateFormat. getTimeInstance()</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.group.minOccurs</code></td>
-  <td>Sets the default <code>minOccurs</code> for a <a href="#group"><code>group</code></a>.</td>
-  <td><code>0</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.record.minOccurs</code></td>
-  <td>Sets the default <code>minOccurs</code> for a <a href="#record"><code>record</code></a>.</td>
-  <td><code>0</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.field.minOccurs.[format]</code></td>
-  <td>Sets the default <code>minOccurs</code> for a <a href="#field"><code>field</code></a> by stream format.</td>
-  <td><code>1</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.propertyAccessorFactory </code></td>
-  <td>Sets the method of property invocation to use. Defaults to <code>reflection</code>.</td>
-</tr>
-<tr>
-  <td><code>org.beanio.xml.defaultXmlType</code></td>
-  <td>Sets the default XML type for a field in an XML formatted stream.  May be set
-    to <code>element</code> or <code>attribute</code>.</td>
-  <td><code>element</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.xml.xsiNamespacePrefix</code></td>
-  <td>Sets the default prefix for the namespace <code>http://www.w3.org/2001/XMLSchema-instance</code>.</td>
-  <td><code>xsi</code></td>
-</tr>
-<tr>
-  <td><code>org.beanio.xml.sorted</code></td>
-  <td>Whether XML fields are sorted by position (if assigned).</td>
-  <td><code>true</code></td>
-</tr>
-</tbody>
-</table>
-
+| Property                              | Description                                                                                                                                                                               | Default                             |
+|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `org.beanio.allowProtectedAccess`     | Whether private and protected class variables and constructors can be accessed (i.e. make accessible using the reflection API).                                                           | `true`                              |
+| `org.beanio.lazyIfEmpty`              | Whether objects are lazily instantiated if String properties are empty (and not just null).                                                                                               | `true`                              |
+| `org.beanio.errorIfNullPrimitive`     | Whether null field values will cause an exception if bound to a primitive property.                                                                                                       | `false`                             |
+| `org.beanio.useDefaultIfMissing`      | Whether default values apply to fields missing from the stream.                                                                                                                           | `true`                              |
+| `org.beanio.propertyEscapingEnabled`  | Whether [`property`](#property) values (for `typeHandler`, `reader` and `writer` elements) support escape patterns for line feeds, carriage returns, tabs, etc. Set to `true` or `false`. | `true`                              |
+| `org.beanio.nullEscapingEnabled`      | Whether the null character can be escaped using `\0` when property escaping is enabled. Set to `true` or `false`.                                                                         | `true`                              |
+| `org.beanio.marshalDefaultEnabled`    | Whether a configured [`field`](#field) default is marshalled for null property values. May be disabled for backwards compatibility by setting the value to `false`.                       | `true`                              |
+| `org.beanio.defaultTypeHandlerLocale` | Sets the default type handler locale.                                                                                                                                                     | `Locale.getDefault()`               |
+| `org.beanio.defaultDateFormat`        | Sets the default `SimpleDateFormat` pattern for `date` and `calendar-date` type fields in CSV, delimited and fixed length file formats.                                                   | `DateFormat. getDateInstance()`     |
+| `org.beanio.defaultDateTimeFormat`    | Sets the default `SimpleDateFormat` pattern for `datetime`, `calendar-datetime` and `calendar` type fields in CSV, delimited and fixed length file formats..                              | `DateFormat. getDateTimeInstance()` |
+| `org.beanio.defaultTimeFormat`        | Sets the default `SimpleDateFormat` pattern for `time` and `calendar-time` type fields in CSV, delimited and fixed length file formats..                                                  | `DateFormat. getTimeInstance()`     |
+| `org.beanio.group.minOccurs`          | Sets the default `minOccurs` for a [`group`](#group).                                                                                                                                     | `0`                                 |
+| `org.beanio.record.minOccurs`         | Sets the default `minOccurs` for a [`record`](#record).                                                                                                                                   | `0`                                 |
+| `org.beanio.field.minOccurs.[format]` | Sets the default `minOccurs` for a [`field`](#field) by stream format.                                                                                                                    | `1`                                 |
+| `org.beanio.propertyAccessorFactory`  | Sets the method of property invocation to use. Defaults to `reflection`.                                                                                                                  |
+| `org.beanio.xml.defaultXmlType`       | Sets the default XML type for a field in an XML formatted stream. May be set to `element` or `attribute`.                                                                                 | `element`                           |
+| `org.beanio.xml.xsiNamespacePrefix`   | Sets the default prefix for the namespace `http://www.w3.org/2001/XMLSchema-instance`.                                                                                                    | `xsi`                               |
+| `org.beanio.xml.sorted`               | Whether XML fields are sorted by position (if assigned).                                                                                                                                  | `true`                              |
+| `org.beanio.fixedlength.countMode`    | Determines how field lengths are computed, either `chars` or `bytes`.                                                                                                                     | `chars`                             |
+| `org.beanio.fixedlength.charset`      | The charset used to compute field lengths and values when `org.beanio.fixedlength.countMode` is `bytes`                                                                                   | `utf-8`                             |
 
 ## Appendix A: XML Mapping File Reference
 
