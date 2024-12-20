@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbeanio_github_org=self.webpackChunkbeanio_github_org||[]).push([[661],{1892:(e,r,s)=>{s.r(r),s.d(r,{default:()=>o});s(7294);var u=s(512),a=s(1944),n=s(5281),t=s(8790),c=s(6040),i=s(5893);function o(e){return(0,i.jsx)(a.FG,{className:(0,u.Z)(n.k.wrapper.docsPages),children:(0,i.jsx)(c.Z,{children:(0,t.H)(e.route.routes)})})}}}]);
