@@ -3211,7 +3211,7 @@ where N and M are integer values:
 <table className="indent" border="0">
 <tbody>
   <tr><td>N</td><td>Upper and lower boundaries are set to N.</td></tr>
-  <tr><td>N-M</td><td>Lower boundery is set to N.  Upper boundary is set to M.</td></tr>
+  <tr><td>N-M</td><td>Lower boundary is set to N.  Upper boundary is set to M.</td></tr>
   <tr><td>N+</td><td>Lower boundary is set to N.  No upper boundary.</td></tr>
 </tbody>
 </table>
@@ -3537,7 +3537,7 @@ Attributes:
 <tr>
   <td><code>occurs</code></td>
   <td>An alternative to specifying both <code>minOccurs</code> and <code>maxOccurs</code>
-    that uses <a href="#range">range notation</a>.</td>
+    that uses <a href="#ranges">range notation</a>.</td>
   <td>No</td>
   <td>*</td>
 </tr>
