@@ -3091,7 +3091,7 @@ property.
 Continuing our previous example, the `example.Employee` class could be annotated like so:
 
 ```java
-@Record(minOccurs=1}
+@Record(minOccurs=1)
 @Fields({
     @Field(name="type", at=0, rid=true, literal="EMP")
 })
